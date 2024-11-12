@@ -1,11 +1,17 @@
 import { useState } from "react";
+import "./App.css";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [score, setScore] = useState(0);
 
   return (
     <>
-      <h1>Memory Card Game</h1>
+      <Header score={score} />
+      <main></main>
+      <Footer />
     </>
   );
 }
