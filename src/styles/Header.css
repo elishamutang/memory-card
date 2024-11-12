@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Karrik-Italic";
+  src: local("Karrik"), url(../fonts/Karrik-Italic.woff2), format("woff");
+}
+
+@font-face {
+  font-family: "Karrik-Regular";
+  src: local("Karrik"), url(../fonts/Karrik-Regular.woff2), format("woff");
+}
+
+* {
+  font-family: "Karrik-Regular", "Times New Roman", "Arial";
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 400;
+}
+
+.scoreboard {
+  margin: 2rem;
+  font-size: 1.5rem;
+}
