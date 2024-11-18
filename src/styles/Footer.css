@@ -2,3 +2,7 @@ h2 {
   font-family: "Karrik-Italic", "Times New Roman", "Arial";
   font-weight: 400;
 }
+
+footer {
+  margin-top: 1rem;
+}
