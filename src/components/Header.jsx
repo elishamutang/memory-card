@@ -7,7 +7,7 @@ export default function Header({ score }) {
       <h1>Friends Memory Game</h1>
       <div className="scoreboard">
         <p>Score: {score}</p>
-        <p>Best Score: {score}</p>
+        <p>Best Score: 0</p>
       </div>
     </header>
   );
