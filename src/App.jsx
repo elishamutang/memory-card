@@ -10,17 +10,23 @@ function App() {
 
   const endPoint = new URL("https://api.giphy.com/v1/gifs/search");
   endPoint.searchParams.append("api_key", "XKelAPHESxBXFhHXS8Hv8Ou4VzWbEbhy");
-  endPoint.searchParams.append("q", "friends");
-  endPoint.searchParams.append("limit", "12");
+  endPoint.searchParams.append("q", "Friends");
 
   useEffect(() => {
+    // Fetch GIFs.
     fetch(endPoint)
       .then((res) => res.json())
       .then((dataObj) => {
         setImages(() => {
-          const imagesCopy = [...dataObj.data];
+          // Filter only GIFs from the show 'Friends'.
+          const imagesCopy = [...dataObj.data].filter((item) => {
+            if (item.slug.startsWith("Friends")) {
+              return item;
+            }
+          });
 
-          return imagesCopy;
+          const randomisedImages = randomise(imagesCopy.slice(0, 12));
+          return randomisedImages;
         });
       })
       .catch((error) => {
@@ -30,12 +36,41 @@ function App() {
 
   console.log(images);
 
+  function clickHandler(e) {
+    console.log(e.target);
+
+    // After each click, randomise GIFs.
+    // Add to score IF:
+    // a) User did not click on a image that has already been clicked previously.
+    randomise(images);
+
+    setScore(score + 1);
+  }
+
+  // Fisher-Yates Shuffle
+  function randomise(arr) {
+    let currentIdx = arr.length;
+
+    while (--currentIdx > 0) {
+      let randomIdx = Math.floor(Math.random() * currentIdx);
+      let tempVal = arr[randomIdx];
+
+      // Swap
+      arr[randomIdx] = arr[currentIdx];
+      arr[currentIdx] = tempVal;
+    }
+
+    return arr;
+  }
+
   return (
     <>
       <Header score={score} />
       <main>
         {images.map((item) => {
-          return <img key={item.id} src={item.images.original.webp} className="image" />;
+          return (
+            <img key={item.id} id={item.id} src={item.images.original.webp} onClick={clickHandler} className="image" />
+          );
         })}
       </main>
       <Footer />
