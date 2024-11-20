@@ -43,4 +43,12 @@ main {
 
 .image {
   width: 15%;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.image:hover {
+  border: 2px solid white;
+  cursor: pointer;
+  transition: 0.3s;
 }
