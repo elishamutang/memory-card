@@ -1,8 +1,14 @@
 h2 {
-  font-family: "Karrik-Italic", "Times New Roman", "Arial";
+  font-family: "Karrik-Regular", "Times New Roman", "Arial";
   font-weight: 400;
 }
 
 footer {
   margin-top: 1rem;
+}
+
+a {
+  font-family: "Karrik-Italic", "Times New Roman", "Arial";
+  text-decoration: none;
+  color: white;
 }
