@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 
 function App() {
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [images, setImages] = useState([]);
 
   const endPoint = new URL("https://api.giphy.com/v1/gifs/search");
@@ -37,14 +38,19 @@ function App() {
   console.log(images);
 
   function clickHandler(e) {
-    console.log(e.target);
-
     // After each click, randomise GIFs.
     // Add to score IF:
     // a) User did not click on a image that has already been clicked previously.
-    randomise(images);
 
-    setScore(score + 1);
+    if (!e.target.classList.contains("clicked")) {
+      setScore(score + 1);
+    } else {
+      setBestScore(score);
+      setScore(0);
+    }
+
+    e.target.classList.toggle("clicked");
+    randomise(images);
   }
 
   // Fisher-Yates Shuffle
@@ -65,7 +71,7 @@ function App() {
 
   return (
     <>
-      <Header score={score} />
+      <Header score={score} bestScore={bestScore} />
       <main>
         {images.map((item) => {
           return (
