@@ -12,19 +12,18 @@ html {
 }
 
 body {
-  background-color: hsl(211 94% 10%);
+  background-color: hsl(0, 0%, 90%);
   width: 100%;
   height: 100%;
 }
 
 #root {
-  /* max-width: 1400px; */
   height: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  color: white;
-  background-color: hsl(211, 51%, 22%);
+  color: black;
+  background-color: hsl(360 0% 95%);
 
   display: flex;
   flex-direction: column;
@@ -48,7 +47,7 @@ main {
 }
 
 .image:hover {
-  border: 2px solid white;
+  border: 2px solid black;
   cursor: pointer;
   transition: 0.3s;
 }
