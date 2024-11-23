@@ -1,10 +1,13 @@
 import "../styles/Header.css";
+import Logo from "../assets/Friends_logo.svg";
 
 export default function Header({ score, bestScore }) {
   return (
     <header className="header">
-      {/* Insert Friends logo instead of typed out version. */}
-      <h1>Friends Memory Game</h1>
+      <div className="logo">
+        <img src={Logo} style={{ width: "20%" }} />
+        <h1>Memory Game</h1>
+      </div>
       <div className="scoreboard">
         <p>Score: {score}</p>
         <p>Best Score: {bestScore}</p>
