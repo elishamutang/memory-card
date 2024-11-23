@@ -20,12 +20,17 @@ function App() {
       .then((res) => res.json())
       .then((dataObj) => {
         setImages(() => {
-          // Filter only GIFs from the show 'Friends'.
-          const imagesCopy = [...dataObj.data].filter((item) => {
-            if (item.slug.startsWith("Friends")) {
-              return item;
-            }
-          });
+          // Filter only GIFs from the show 'Friends' and
+          // add 'clicked' property to each image.
+          const imagesCopy = [...dataObj.data]
+            .filter((item) => {
+              if (item.slug.startsWith("Friends")) {
+                return item;
+              }
+            })
+            .map((item) => {
+              return { ...item, clicked: false };
+            });
 
           const randomisedImages = randomise(imagesCopy.slice(0, 12));
           return randomisedImages;
@@ -36,29 +41,44 @@ function App() {
       });
   }, []);
 
-  // Reset image classes.
-  useEffect(() => {
-    console.log("reset images");
-  }, [bestScore]);
-
-  console.log(images);
-
   function clickHandler(e) {
-    // After each click, randomise GIFs.
-    // Add to score IF:
+    // After each click, add to score IF:
     // a) User did not click on a image that has already been clicked previously.
+    // and then randomise location of GIFs.
 
     if (!e.target.classList.contains("clicked")) {
+      // Add score
       setScore(score + 1);
+
+      // Update image clicked property.
+      setImages(() => {
+        const updatedImages = images.map((item) => {
+          if (item.id === e.target.id) {
+            return { ...item, clicked: true };
+          } else {
+            return item;
+          }
+        });
+
+        return updatedImages;
+      });
     } else {
       // Set best score
       setBestScore(score);
 
       // Reset current score
       setScore(0);
+
+      // Reset images
+      setImages(() => {
+        const updatedImages = images.map((item) => {
+          return { ...item, clicked: false };
+        });
+
+        return updatedImages;
+      });
     }
 
-    e.target.classList.toggle("clicked");
     randomise(images);
   }
 
