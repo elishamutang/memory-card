@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import Header from "./components/Header";
+import Images from "./components/Images";
 import Footer from "./components/Footer";
 
 function App() {
@@ -13,8 +14,8 @@ function App() {
   endPoint.searchParams.append("api_key", "XKelAPHESxBXFhHXS8Hv8Ou4VzWbEbhy");
   endPoint.searchParams.append("q", "Friends");
 
+  // Fetch GIFs on initial render.
   useEffect(() => {
-    // Fetch GIFs.
     fetch(endPoint)
       .then((res) => res.json())
       .then((dataObj) => {
@@ -35,6 +36,11 @@ function App() {
       });
   }, []);
 
+  // Reset image classes.
+  useEffect(() => {
+    console.log("reset images");
+  }, [bestScore]);
+
   console.log(images);
 
   function clickHandler(e) {
@@ -45,7 +51,10 @@ function App() {
     if (!e.target.classList.contains("clicked")) {
       setScore(score + 1);
     } else {
+      // Set best score
       setBestScore(score);
+
+      // Reset current score
       setScore(0);
     }
 
@@ -72,13 +81,7 @@ function App() {
   return (
     <>
       <Header score={score} bestScore={bestScore} />
-      <main>
-        {images.map((item) => {
-          return (
-            <img key={item.id} id={item.id} src={item.images.original.webp} onClick={clickHandler} className="image" />
-          );
-        })}
-      </main>
+      <Images images={images} clickHandler={clickHandler} />
       <Footer />
     </>
   );
