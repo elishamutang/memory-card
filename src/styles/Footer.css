@@ -12,3 +12,8 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.attribution-mark {
+  width: 10%;
+  margin-top: 1rem;
+}
